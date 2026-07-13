@@ -15,6 +15,11 @@ public class FloatingNumberVariable {
     System.out.println(floatNumber2);
     System.out.println(doubleNumber1);
 
+    long longNumber = 1000l;
+    System.out.println(longNumber);
+
+    System.out.println(longNumber + floatNumber);
+    System.out.println((long) (longNumber + floatNumber));
 
   }
 }
