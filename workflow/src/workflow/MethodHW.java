@@ -71,6 +71,8 @@ public class MethodHW {
     System.out.println("is 4 prime number? " + isPrimeNum(4));
     System.out.println("is 5 prime number? " + isPrimeNum(5));
     System.out.println("is 6 prime number? " + isPrimeNum(6));
+    System.out.println("is 345 prime number? " + isPrimeNum(345));
+    System.out.println("is 347 prime number? " + isPrimeNum(347));
 
   }
 }
