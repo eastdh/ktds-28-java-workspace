@@ -250,10 +250,13 @@ public class MethodHW0716 {
     System.out.println("15 -----------------"); // 15.
     int[] arrA = {1, 2, 3, 4, 5};
     int[] arrB = {9, 7, 454, 1, 2, 3};
+    int[] arrC = {1, 2, 3, 4, 5};
     printDuplicate(arrA, arrB);
+    printDuplicate(arrC, arrC);
 
     System.out.println("16 -----------------"); // 16.
     printAllUnique(arrA, arrB);
+    printAllUnique(arrC, arrC);
 
     System.out.println("17 -----------------"); // 17.
     int[] arr2X = {1, 2, 3, 4, 5};
