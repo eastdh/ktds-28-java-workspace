@@ -171,6 +171,7 @@ public class MethodHW0716 {
       for (int j = 0; j < b.length; j++) {
         if (a[i] == b[j]) {
           isUnique = false;
+          break;
         }
       }
       if (isUnique) {
