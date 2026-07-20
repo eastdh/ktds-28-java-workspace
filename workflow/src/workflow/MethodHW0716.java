@@ -238,7 +238,7 @@ public class MethodHW0716 {
 
     System.out.println("12 -----------------"); // 12.
     System.out.print("primes -> ");
-    print4toNPrimeOnly(100);
+    print4toNPrimeOnly(101);
 
     System.out.println("13 -----------------"); // 13.
     System.out.println(arrayNthValueReturn(arr50, 2));
