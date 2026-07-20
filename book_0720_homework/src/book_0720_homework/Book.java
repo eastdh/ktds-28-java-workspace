@@ -2,7 +2,7 @@ package book_0720_homework;
 
 public class Book {
 
-  int ISBN;
+  int isbn;
   String title;
   String subTitle;
   Author author;
