@@ -4,31 +4,32 @@ public class Market {
 
   public static void main(String[] args) {
 
-    Seller sellerA = new Seller(0, 5, 1000);
-    Seller sellerB = new Seller(1, 6, 2000);
-    Seller sellerC = new Seller(2, 7, 3000);
-    Seller sellerD = new Seller(3, 8, 4000);
-    Seller[] sellers = {sellerA, sellerB, sellerC, sellerD};
+    final int PERSON = 10;
 
-    Buyer buyerA = new Buyer(0, 5000);
-    Buyer buyerB = new Buyer(1, 6000);
-    Buyer buyerC = new Buyer(2, 30000);
-    Buyer buyerD = new Buyer(3, 40000);
-    Buyer[] buyers = {buyerA, buyerB, buyerC, buyerD};
+    Seller[] sellers = new Seller[PERSON];
+    for (int i = 0; i < sellers.length; i++) {
+      int stock = (int) (Math.random() * 10) + 5;
+      int price = (int) (Math.random() * 10 + 1) * 1000;
+      sellers[i] = new Seller(i, stock, price);
+    }
 
+    Buyer[] buyers = new Buyer[PERSON];
+    for (int i = 0; i < buyers.length; i++) {
+      int cash = (int) (Math.random() * 10 + 1) * 10000;
+      buyers[i] = new Buyer(i, cash);
+    }
 
     for (int i = 0; i < 10; i++) {
-      int sellerIndex = (int) (Math.random() * 4);
-      int buyerIndex = (int) (Math.random() * 4);
+      int sellerIndex = (int) (Math.random() * PERSON);
+      int buyerIndex = (int) (Math.random() * PERSON);
 
       Seller s = sellers[sellerIndex];
       Buyer b = buyers[buyerIndex];
 
-      int order = i % 3 + 1;
+      int order = (int) (Math.random() * 10) + 1;
 
       if (s.canSell() && b.canBuy(s.price, order)) {
-        s.sell(order);
-        b.buy(s.price, order);
+        b.buy(s.price, s.sell(order));
       }
       System.out.println();
     }

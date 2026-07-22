@@ -34,7 +34,8 @@ public class Seller {
 
     stock -= number;
     cash += price * number;
-    System.out.println(sellerId + ", " + price + "원 " + number + "개 판매. 매출: " + cash);
+    System.out
+        .println(sellerId + ", " + price + "원 " + number + "개 판매. 매출: " + cash + " 재고: " + stock);
     return number;
   }
 

@@ -27,6 +27,7 @@ public class Buyer {
   public void buy(int price, int number) {
     cart += number;
     cash -= price * number;
-    System.out.println(buyerId + ", " + price + "원 " + number + "개 구매. 잔액: " + cash);
+    System.out
+        .println(buyerId + ", " + price + "원 " + number + "개 구매. 잔액: " + cash + " 장바구니: " + cart);
   }
 }
