@@ -27,16 +27,11 @@ public class Seller {
     }
   }
 
-  public int sell(int number) {
-    if (number > stock) {
-      number = stock;
-    }
-
+  public void sell(int number) {
     stock -= number;
     cash += price * number;
     System.out
         .println(sellerId + ", " + price + "원 " + number + "개 판매. 매출: " + cash + " 재고: " + stock);
-    return number;
   }
 
 

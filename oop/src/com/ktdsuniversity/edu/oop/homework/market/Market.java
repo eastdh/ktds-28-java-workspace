@@ -27,9 +27,13 @@ public class Market {
       Buyer b = buyers[buyerIndex];
 
       int order = (int) (Math.random() * 10) + 1;
+      if (order > s.stock) {
+        order = s.stock;
+      }
 
       if (s.canSell() && b.canBuy(s.price, order)) {
-        b.buy(s.price, s.sell(order));
+        s.sell(order);
+        b.buy(s.price, order);
       }
       System.out.println();
     }
