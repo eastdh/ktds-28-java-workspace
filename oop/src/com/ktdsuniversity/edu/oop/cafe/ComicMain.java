@@ -4,6 +4,7 @@ public class ComicMain {
 
   public static void main(String[] args) {
 
+    // 랜덤 수치로 초기화
     final int BOOK_COUNT = 10;
     ComicBook[] comicBooks = new ComicBook[BOOK_COUNT];
     for (int i = 0; i < comicBooks.length; i++) {
@@ -30,23 +31,30 @@ public class ComicMain {
       ComicBook b = cafe.getComicBooks()[bookIndex];
       Visitor v = visitors[visitorIndex];
 
+      System.out.println();
       if (cafe.canBorrow(b) && v.canBorrow(b)) {
         cafe.borrowBook(b);
         v.borrowBook(b);
-        System.out.print(v.getVisitorId() + ", " + b.getTitle() + "빌림 - 대여 목록: ");
-        for (int j = 0; j < v.getBorrowedBooks().length; j++) {
-          if (v.getBorrowedBooks()[j] == null) {
-            continue;
-          }
-          System.out.print(v.getBorrowedBooks()[j].getTitle() + " ");
-        }
-        System.out.println();
+        v.printBorrowedBooks();
       }
 
     }
 
     cafe.printAllBooks();
 
+    // 빌린 책 전체 반납
+    for (int i = 0; i < visitors.length; i++) {
+      Visitor v = visitors[i];
+      ComicBook[] books = v.getBorrowedBooks();
+      for (int j = 0; j < books.length; j++) {
+        if (books[j] == null) {
+          continue;
+        }
+        cafe.returnBook(books[j]);
+        v.returnBook(books[j]);
+      }
+      System.out.println(v.toString());
+    }
 
 
   }

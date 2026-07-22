@@ -41,12 +41,15 @@ public class ComicBookCafe {
     if (!book.isBorrowed()) {
       book.setBorrowed(true);
       this.cash += book.getRentalFee();
+      System.out.println(book.getTitle() + " 빌려줌 - 총 매출액: " + this.cash);
+
     }
   }
 
   public void returnBook(ComicBook book) {
     if (book.isBorrowed()) {
       book.setBorrowed(false);
+      System.out.println(book.getTitle() + " 이용자로부터 돌려받음");
     }
   }
 
