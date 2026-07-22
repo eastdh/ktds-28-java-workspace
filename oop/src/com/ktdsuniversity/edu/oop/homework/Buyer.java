@@ -15,11 +15,16 @@ public class Buyer {
     this.cash = cash;
   }
 
-  public void buy(int price, int number) {
+  public boolean canBuy(int price, int number) {
     if (price * number > cash) {
       System.out.println(buyerId + ", 잔액 없음");
-      return;
+      return false;
+    } else {
+      return true;
     }
+  }
+
+  public void buy(int price, int number) {
     cart += number;
     cash -= price * number;
     System.out.println(buyerId + ", " + price + "원 " + number + "개 구매. 잔액: " + cash);

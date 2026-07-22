@@ -18,12 +18,16 @@ public class Seller {
     this.price = price;
   }
 
-  public int sell(int number) {
+  public boolean canSell() {
     if (stock <= 0) {
       System.out.println(sellerId + ", 재고 없음");
-      return 0;
+      return false;
+    } else {
+      return true;
     }
+  }
 
+  public int sell(int number) {
     if (number > stock) {
       number = stock;
     }

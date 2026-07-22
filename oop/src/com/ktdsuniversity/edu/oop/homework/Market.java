@@ -21,7 +21,15 @@ public class Market {
       int sellerIndex = (int) (Math.random() * 4);
       int buyerIndex = (int) (Math.random() * 4);
 
-      buyers[buyerIndex].buy(sellers[sellerIndex].price, sellers[sellerIndex].sell(i % 3 + 1));
+      Seller s = sellers[sellerIndex];
+      Buyer b = buyers[buyerIndex];
+
+      int order = i % 3 + 1;
+
+      if (s.canSell() && b.canBuy(s.price, order)) {
+        s.sell(order);
+        b.buy(s.price, order);
+      }
       System.out.println();
     }
 
