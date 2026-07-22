@@ -1,4 +1,4 @@
-package com.ktdsuniversity.edu.oop.homework;
+package com.ktdsuniversity.edu.oop.homework.market;
 
 public class Buyer {
 
