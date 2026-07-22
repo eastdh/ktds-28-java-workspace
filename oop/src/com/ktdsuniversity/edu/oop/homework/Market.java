@@ -10,8 +10,8 @@ public class Market {
     Seller sellerD = new Seller(3, 8, 4000);
     Seller[] sellers = {sellerA, sellerB, sellerC, sellerD};
 
-    Buyer buyerA = new Buyer(0, 10000);
-    Buyer buyerB = new Buyer(1, 20000);
+    Buyer buyerA = new Buyer(0, 5000);
+    Buyer buyerB = new Buyer(1, 6000);
     Buyer buyerC = new Buyer(2, 30000);
     Buyer buyerD = new Buyer(3, 40000);
     Buyer[] buyers = {buyerA, buyerB, buyerC, buyerD};
@@ -21,7 +21,8 @@ public class Market {
       int sellerIndex = (int) (Math.random() * 4);
       int buyerIndex = (int) (Math.random() * 4);
 
-      buyers[buyerIndex].buy(sellers[sellerIndex].price, sellers[sellerIndex].sell(i));
+      buyers[buyerIndex].buy(sellers[sellerIndex].price, sellers[sellerIndex].sell(i % 3 + 1));
+      System.out.println();
     }
 
   }

@@ -20,6 +20,7 @@ public class Seller {
 
   public int sell(int number) {
     if (stock <= 0) {
+      System.out.println(sellerId + ", 재고 없음");
       return 0;
     }
 

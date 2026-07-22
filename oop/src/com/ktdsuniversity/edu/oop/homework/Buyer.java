@@ -17,6 +17,7 @@ public class Buyer {
 
   public void buy(int price, int number) {
     if (price * number > cash) {
+      System.out.println(buyerId + ", 잔액 없음");
       return;
     }
     cart += number;
