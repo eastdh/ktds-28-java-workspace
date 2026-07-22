@@ -17,7 +17,7 @@ public class Buyer {
 
   public boolean canBuy(int price, int number) {
     if (price * number > cash) {
-      System.out.println(buyerId + ", 잔액 없음");
+      System.out.println(buyerId + ", 잔액 없음 (주문 금액: " + price * number + ", 잔고: " + cash + ")");
       return false;
     } else {
       return true;
