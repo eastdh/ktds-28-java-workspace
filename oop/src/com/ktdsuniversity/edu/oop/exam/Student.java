@@ -8,6 +8,15 @@ public class Student {
   int cpp;
   int csharp;
 
+
+  public Student() {
+    // this.java = 100;
+    // this.python = 100;
+    // this.cpp = 100;
+    // this.csharp = 100;
+    this(100, 100, 100, 100);
+  }
+
   /**
    * @param java
    * @param python
@@ -82,6 +91,7 @@ public class Student {
 
   public static void main(String[] args) {
     Student student = new Student(78, 89, 97, 68);
+    Student kim = new Student();
 
     int sum = student.getSumAllScores();
     double avg = student.getAverage(sum);
