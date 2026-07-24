@@ -1,24 +1,17 @@
+import java.util.Arrays;
+
 class Solution {
   public static void main(String[] args) {
     Solution my = new Solution();
     // TCs
-    // int x = 10;
-    // int x = 12;
-    int x = 11;
-    // int x = 13;
+    String[] seoul = {"Jane", "Kim"}; // TC #1
 
     // Solution output
-    boolean output = my.solution(x);
+    String output = my.solution(seoul);
     System.out.println(output);
   }
 
-  public boolean solution(int x) {
-    int sum = 0;
-    int n = x;
-    while (n > 0) {
-      sum += n % 10;
-      n /= 10;
-    }
-    return x % sum == 0;
+  public String solution(String[] seoul) {
+    return "김서방은 " + Arrays.asList(seoul).indexOf("Kim") + "에 있다";
   }
 }
