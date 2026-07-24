@@ -4,18 +4,22 @@ class Solution {
   public static void main(String[] args) {
     Solution my = new Solution();
     // TCs
-    String str1 = "abc"; // TC #1
-    String str2 = "aabcc"; // TC #1
-    // String str1 = "tbt";		//TC #2
-    // String str2 = "tbbttb";		//TC #2
+    String my_string = "i love you"; // TC #1
+    // String my_string = "programmers";		//TC #2
 
     // Solution output
-    int output = my.solution(str1, str2);
-    System.out.println(output);
+    String[] output = my.solution(my_string);
+    System.out.print("[");
+    for (int i = 0; i < output.length; i++) {
+      System.out.print(output[i]);
+      if (i == (output.length - 1)) break;
+      else System.out.print(", ");
+    }
+    System.out.println("]");
   }
 
-  public int solution(String str1, String str2) {
-    int answer = str2.contains(str1) ? 1 : 0;
+  public String[] solution(String my_string) {
+    String[] answer = my_string.split(" ");
     return answer;
   }
 }
