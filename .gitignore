@@ -5,6 +5,11 @@
 .classpath
 .project
 
+# vscode 세팅
+*/.vscode
+
 # 프로젝트 세팅
 */.settings
 */bin
+*/lib
+
