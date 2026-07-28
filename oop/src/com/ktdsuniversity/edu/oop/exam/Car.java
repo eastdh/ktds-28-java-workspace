@@ -46,6 +46,12 @@ public class Car {
     }
   }
 
+  @Override
+  public String toString() {
+    // 출력의 형태를 정의
+    return this.zero100Seconds + "";
+  }
+
 
   public static void main(String[] args) {
 
@@ -55,6 +61,15 @@ public class Car {
 
     // Car 타입의 carnival 인스터스를 생성
     Car carnival = new Car(8);
+
+
+    System.out.println(kona); // Type@HashData
+    System.out.println(carnival); // Type@HashData
+    String name = "ddddddd";
+    System.out.println(name); // ddddddd
+    StringBuffer buffer = new StringBuffer();
+    buffer.append("aasssaas");
+    System.out.println(buffer); // aasssaas
 
     // 인스턴스는 자신의 멤버변수의 값을 할당하거나 출력할 수 있다.
     // kona.isEngineStart = true;
