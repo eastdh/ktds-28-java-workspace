@@ -26,6 +26,9 @@ public class ComicBookCafe {
 
   public void printAllBooks() {
     for (int i = 0; i < comicBooks.length; i++) {
+      if (comicBooks[i] == null) {
+        continue;
+      }
       System.out.println(comicBooks[i].toString());
     }
   }
