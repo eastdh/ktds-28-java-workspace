@@ -132,14 +132,14 @@ public class Main {
 
     // 20. 문자열 형태의 배열 변수를 만들고 값을 랜덤하게 할당해보세요.
     String[] randomStrings = new String[20];
-    System.out.println();
+    System.out.println("랜덤 문자열 출력: ");
     for (int i = 0; i < randomStrings.length; i++) {
       randomStrings[i] = "";
       int randomLength = (int) (Math.random() * 10 + 1);
       for (int j = 0; j < randomLength; j++) {
         randomStrings[i] += (char) ((int) (Math.random() * 26) + 97);
       }
-      System.out.println(randomStrings[i]);
+      System.out.println("\t" + randomStrings[i]);
     }
     // 21. 문자열 형태의 배열 변수 내의 모든 문자열의 길이를 합한 값을 계산해 출력해보세요.
     int lengthSum = 0;
