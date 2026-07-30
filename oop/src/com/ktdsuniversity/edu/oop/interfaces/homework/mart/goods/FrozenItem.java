@@ -1,4 +1,4 @@
-package com.ktdsuniversity.edu.oop.interfaces.homework.mart;
+package com.ktdsuniversity.edu.oop.interfaces.homework.mart.goods;
 
 public class FrozenItem extends FreshItem {
 

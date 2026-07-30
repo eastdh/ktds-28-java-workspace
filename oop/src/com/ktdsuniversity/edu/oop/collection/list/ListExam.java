@@ -94,16 +94,34 @@ public class ListExam {
     goodsList.add(new Goods("ccc", 3333));
 
     // goodsList의 0번째 인덱스에 있는 Goods 인스턴스를 가져와 출력한다.
-    System.out.println(goodsList.get(0));
+    Goods goods0 = goodsList.get(0);
+    System.out.println(goods0);
     // goodsList의 1번째 인덱스에 있는 Goods 인스턴스를 가져와 출력한다.
-    System.out.println(goodsList.get(1));
+    Goods goods1 = goodsList.get(1);
+    System.out.println(goods1);
     // goodsList의 2번째 인덱스에 있는 Goods 인스턴스를 가져와 출력한다.
-    System.out.println(goodsList.get(2));
+    Goods goods2 = goodsList.get(2);
+    System.out.println(goods2);
 
     // goodsList의 모든 Goods 인스턴스를 출력한다 (for)
     for (int i = 0; i < goodsList.size(); i++) {
-      System.out.println(goodsList.get(i));
+      Goods goodsI = goodsList.get(i);
+      System.out.println(goodsI);
 
     }
+
+    Goods newGoods = new Goods("상품1", 500);
+    Goods otherGoods = new Goods("상품1", 500);
+    System.out.println(newGoods == otherGoods); // false => Reference Type! 메모리가 다르다.
+    System.out.println("goods equals: " + newGoods.equals(otherGoods));
+
+    Goods cloneGoods = otherGoods;
+    System.out.println(cloneGoods == newGoods); // false
+    System.out.println(cloneGoods == otherGoods); // true
+
+    goodsList.add(newGoods);
+    // goodsList에서 상품 이름이 "상품1"인 Goods가 존재하는가?
+    boolean haveGoods = goodsList.contains(new Goods("상품1", 500));
+    System.out.println(haveGoods);
   }
 }

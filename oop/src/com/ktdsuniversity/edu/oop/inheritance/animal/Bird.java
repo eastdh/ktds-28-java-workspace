@@ -2,40 +2,39 @@ package com.ktdsuniversity.edu.oop.inheritance.animal;
 
 public class Bird extends Animal {
 
-  private String feather;
-  private String wings;
-  private String beak;
+  private boolean isLanded;
+  private boolean canFly;
+  private int flightDistance;
 
-  /**
-   * @param name
-   * @param age
-   * @param sex
-   * @param weight
-   * @param height
-   * @param species
-   * @param feather
-   * @param wings
-   * @param beak
-   */
-  public Bird(String name, int age, String sex, float weight, float height, String species,
-      String feather, String wings, String beak) {
-    super(name, age, sex, weight, height, species);
-    this.feather = feather;
-    this.wings = wings;
-    this.beak = beak;
-    System.out.println(super.getName() + "is Bird.");
+  public Bird(String name, int age, String sex, float weight, int tall, int walkingSpeed,
+      int personality) {
+    this(name, age, sex, weight, tall, walkingSpeed, personality, true, Integer.MAX_VALUE);
   }
 
-  @Override
-  public void eat() {
-    super.eat();
-    System.out.println("\t" + super.getName() + "eats with it's" + this.beak);
+  public Bird(String name, int age, String sex, float weight, int tall, int walkingSpeed,
+      int personality, int flightDistance) {
+    this(name, age, sex, weight, tall, walkingSpeed, personality, true, flightDistance);
+  }
+
+  public Bird(String name, int age, String sex, float weight, int tall, int walkingSpeed,
+      int personality, boolean canFly, int flightDistance) {
+    super(name, age, sex, weight, tall, walkingSpeed, personality);
+    this.canFly = canFly;
+    this.flightDistance = flightDistance;
   }
 
   public void fly() {
-    super.move();
-    System.out.println("\t" + super.getName() + "moves by flying using it's " + this.wings + " and "
-        + this.feather);
-
+    if (this.canFly) {
+      System.out.printf("%s가 %dkm/h속도로 %,dm만큼 날아갑니다.\n", super.getName(), super.getSpeed() * 4,
+          this.flightDistance);
+      this.isLanded = false;
+    } else {
+      System.out.printf("%s는 날지 못합니다.\n", super.getName());
+    }
   }
+
+  public boolean isFlying() {
+    return this.isLanded == false;
+  }
+
 }

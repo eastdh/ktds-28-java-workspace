@@ -1,7 +1,7 @@
-package com.ktdsuniversity.edu.oop.interfaces.homework.mart.impl;
+package com.ktdsuniversity.edu.oop.interfaces.homework.mart.customers.impl;
 
-import com.ktdsuniversity.edu.oop.interfaces.homework.mart.Customer;
-import com.ktdsuniversity.edu.oop.interfaces.homework.mart.Item;
+import com.ktdsuniversity.edu.oop.interfaces.homework.mart.customers.Customer;
+import com.ktdsuniversity.edu.oop.interfaces.homework.mart.goods.Item;
 
 public class CustomerImpl implements Customer {
 

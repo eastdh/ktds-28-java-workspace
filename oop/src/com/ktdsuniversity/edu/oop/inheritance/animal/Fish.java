@@ -2,39 +2,31 @@ package com.ktdsuniversity.edu.oop.inheritance.animal;
 
 public class Fish extends Animal {
 
-  private String fin;
-  private String scale;
-  private String gill;
-
   /**
-   * @param name
-   * @param age
-   * @param sex
-   * @param weight
-   * @param height
-   * @param species
-   * @param fin
-   * @param scale
-   * @param gill
+   * 아가미
    */
-  public Fish(String name, int age, String sex, float weight, float height, String species,
-      String fin, String scale, String gill) {
-    super(name, age, sex, weight, height, species);
-    this.fin = fin;
-    this.scale = scale;
-    this.gill = gill;
+  private boolean haveGill;
+  private int diveMinutes;
+
+  public Fish(String name, int age, String sex, float weight, int tall, int speed,
+      int personality) {
+    this(name, age, sex, weight, tall, speed, personality, true, Integer.MAX_VALUE);
   }
 
-  @Override
-  public void breathe() {
-    super.breathe();
-    System.out.println("\t" + super.getName() + " breathes through " + this.gill);
+  public Fish(String name, int age, String sex, float weight, int tall, int speed, int personality,
+      boolean haveGill, int diveMinutes) {
+    super(name, age, sex, weight, tall, speed, personality);
+    this.haveGill = haveGill;
+    this.diveMinutes = diveMinutes;
   }
 
   public void swim() {
-    super.move();
-    System.out.println("\t" + super.getName() + " moves by swimming, using it's " + this.fin
-        + " and " + this.scale);
+    if (this.haveGill) {
+      System.out.printf("%s가 %dkm/h의 속도로 아가미 호흡하며 헤엄칩니다.\n", super.getName(), super.getSpeed());
+    } else {
+      System.out.printf("%s가 %dkm/h의 속도로 헤엄칩니다. 아가미가 없어 %d분마다 호흡하러 수면으로 나옵니다.\n", super.getName(),
+          super.getSpeed(), this.diveMinutes);
+    }
   }
 
 }

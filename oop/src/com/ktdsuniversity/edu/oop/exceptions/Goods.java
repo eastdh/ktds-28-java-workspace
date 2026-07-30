@@ -22,6 +22,13 @@ public class Goods {
     return "Goods [name=" + name + ", price=" + price + "]";
   }
 
+  @Override
+  public boolean equals(Object obj) {
+    if (obj instanceof Goods otherGoods) {
+      return this.name.equals(otherGoods.name) && this.price == otherGoods.price;
+    }
+    return false;
+  }
 
 
 }
