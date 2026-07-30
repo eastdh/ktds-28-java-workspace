@@ -17,4 +17,11 @@ public class Goods {
     return this.price;
   }
 
+  @Override
+  public String toString() {
+    return "Goods [name=" + name + ", price=" + price + "]";
+  }
+
+
+
 }
