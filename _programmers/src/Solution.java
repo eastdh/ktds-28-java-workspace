@@ -1,17 +1,21 @@
-import java.util.Arrays;
-
 class Solution {
   public static void main(String[] args) {
     Solution my = new Solution();
     // TCs
-    String[] seoul = {"Jane", "Kim"}; // TC #1
+    String s = "Zbcdefg"; // TC #1
 
     // Solution output
-    String output = my.solution(seoul);
+    String output = my.solution(s);
     System.out.println(output);
   }
 
-  public String solution(String[] seoul) {
-    return "김서방은 " + Arrays.asList(seoul).indexOf("Kim") + "에 있다";
+  public String solution(String s) {
+    String lowers = "";
+    String uppers = "";
+
+    // 대문자 소문자 분리
+    // 각각 .chars().toArray()해서 sort
+
+    return lowers + uppers;
   }
 }
