@@ -67,8 +67,29 @@ public class Tag {
 
     for (int i = 0; i < clothes.size(); i++) {
       printTags(clothes.get(i));
-
     }
+    /*
+     * 출력 ________
+     * 소재: 나이론
+     * 가격: null
+     * 사이즈: 30
+     * 소재: 폴리
+     * 가격: 16000
+     * 사이즈: null
+     * 소재: 면
+     * 가격: 5000
+     * 사이즈: 50
+     */
+
+
+    /*
+     * 옷
+     * 상의, 하의
+     * 민소매, 반팔, 외투, 긴팔, 바지, 치마
+     * 청바지 반바지 면바지 미니 미디 롱
+     * 각 옷에 달린 태그 정보까지
+     */
+    Map<String, List<Map<String, List<Map<String, Map<String, Object>>>>>> 옷 = new HashMap<>();
   }
 
   public static void printTags(Map<String, Object> tags) {
@@ -77,16 +98,6 @@ public class Tag {
     System.out.println("사이즈: " + tags.get("사이즈"));
   }
 
-  /*
-   * 소재: 나이론
-   * 가격: null
-   * 사이즈: 30
-   * 소재: 폴리
-   * 가격: 16000
-   * 사이즈: null
-   * 소재: 면
-   * 가격: 5000
-   * 사이즈: 50
-   * 
-   */
+
+
 }
