@@ -1,9 +1,8 @@
-package com.ktdsuniversity.edu.oop.homework.community.service.impl;
+package com.ktdsuniversity.edu.oop.homework.community.data;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import com.ktdsuniversity.edu.oop.homework.community.classes.Article;
 import com.ktdsuniversity.edu.oop.homework.community.exceptions.ArticleException;
 import com.ktdsuniversity.edu.oop.homework.community.exceptions.ArticleWriterException;
 import com.ktdsuniversity.edu.oop.homework.community.service.ArticleService;
@@ -67,9 +66,9 @@ public class Community implements ArticleService, ReplyService {
     if (this.articleList.size() == 0) {
       System.out.println("아직 등록된 게시글이 없습니다.");
     } else {
-      for (Article article : this.articleList) {
-        System.out.println(String.format("%d. %s (%d)", article.getIndex(), article.getTitle(),
-            article.getReplyList().size()));
+      for (Article a : this.articleList) {
+        System.out.println(
+            String.format("%d. %s (%d)", a.getIndex(), a.getTitle(), a.getReplyList().size()));
       }
     }
   }
@@ -164,39 +163,131 @@ public class Community implements ArticleService, ReplyService {
 
   @Override
   public void searchArticleByKeyword(String keyword) {
-    // TODO Auto-generated method stub
+    boolean isExist = false;
+    for (Article a : this.articleList) {
+      if (a.getTitle().contains(keyword)) {
+        isExist = true;
+        System.out.println(
+            String.format("%d. %s (%d)", a.getIndex(), a.getTitle(), a.getReplyList().size()));
+      }
+    }
+    if (!isExist) {
+      System.out.println("검색된 게시글이 없습니다.");
+    }
 
   }
 
   @Override
   public void deleteAllArticle() {
-    // TODO Auto-generated method stub
+    int numOfArticles = this.articleList.size();
+    if (numOfArticles == 0) {
+      System.out.println("제거할 게시글이 없습니다.");
+    } else {
+      this.articleList.clear();
+      System.out.println(numOfArticles + "개의 게시글을 삭제했습니다.");
+    }
 
   }
 
 
   @Override
   public void createReply(int articleIndex) {
-    // TODO Auto-generated method stub
+    Article a = findArticleByIndex(articleIndex);
+    if (a == null) {
+      System.out.println("잘못된 게시글 번호입니다.");
+      return;
+    }
+    if (a.getReplyList().size() >= 10) {
+      System.out.println("댓글을 더 이상 등록할 수 없습니다.");
+    } else {
+      String writer = "";
+      String text = "";
 
+      while (true) {
+        try {
+          System.out.print("작성자를 입력하세요: ");
+          writer = sc.nextLine();
+          if (writer == null || writer.isBlank()) {
+            throw new ArticleWriterException("작성자 입력은 필수입니다.");
+          }
+          break;
+        } catch (ArticleWriterException awe) {
+          System.out.println(awe.getMessage());
+        }
+      }
+
+      text = sc.nextLine();
+
+      a.addReply(new Reply(a.getReplyIndex(), text, writer));
+    }
+  }
+
+  /**
+   * 게시글과 댓글인덱스로 댓글을 찾아서 반환.
+   * 
+   * @param a
+   * @param replyIndex
+   * @return Reply
+   */
+  private Reply findReplyByIndex(Article a, int replyIndex) {
+    for (Reply r : a.getReplyList()) {
+      if (r.getIndex() == replyIndex) {
+        return r;
+      }
+    }
+
+    return null;
   }
 
   @Override
   public void deleteReply(int articleIndex, int replyIndex) {
-    // TODO Auto-generated method stub
+    Article a = findArticleByIndex(articleIndex);
+    if (a == null) {
+      System.out.println("잘못된 게시글 번호입니다.");
+      return;
+    }
 
+    Reply r = findReplyByIndex(a, replyIndex);
+    if (r == null) {
+      System.out.println("잘못된 댓글 번호입니다.");
+      return;
+    }
+
+    a.deleteReply(r);
   }
 
   @Override
   public void likeReply(int articleIndex, int replyIndex) {
-    // TODO Auto-generated method stub
+    Article a = findArticleByIndex(articleIndex);
+    if (a == null) {
+      System.out.println("잘못된 게시글 번호입니다.");
+      return;
+    }
 
+    Reply r = findReplyByIndex(a, replyIndex);
+    if (r == null) {
+      System.out.println("잘못된 댓글 번호입니다.");
+      return;
+    }
+
+    r.likeReply();
   }
 
   @Override
   public void deleteAllReply(int articleIndex) {
-    // TODO Auto-generated method stub
+    Article a = findArticleByIndex(articleIndex);
+    if (a == null) {
+      System.out.println("잘못된 게시글 번호입니다.");
+      return;
+    }
 
+    int numOfReplies = a.getReplyList().size();
+    if (numOfReplies == 0) {
+      System.out.println("등록된 댓글이 없습니다.");
+    } else {
+      a.clearReply();
+      System.out.println(numOfReplies + "개의 댓글을 삭제했습니다.");
+    }
   }
 
 }

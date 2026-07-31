@@ -1,4 +1,4 @@
-package com.ktdsuniversity.edu.oop.homework.community.classes;
+package com.ktdsuniversity.edu.oop.homework.community.data;
 
 import java.util.Date;
 
@@ -44,6 +44,9 @@ public class Reply {
     return likes;
   }
 
+  public void likeReply() {
+    this.likes++;
+  }
 
 
 }

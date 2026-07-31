@@ -1,4 +1,4 @@
-package com.ktdsuniversity.edu.oop.homework.community.classes;
+package com.ktdsuniversity.edu.oop.homework.community.data;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -70,6 +70,18 @@ public class Article {
 
   public int getReplyIndex() {
     return this.replyIndex++;
+  }
+
+  public void addReply(Reply r) {
+    this.replyList.add(r);
+  }
+
+  public void deleteReply(Reply r) {
+    this.replyList.remove(r);
+  }
+
+  public void clearReply() {
+    this.replyList.clear();
   }
 
   public void view() {
