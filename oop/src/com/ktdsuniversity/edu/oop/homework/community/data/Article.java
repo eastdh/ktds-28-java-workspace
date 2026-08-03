@@ -91,8 +91,8 @@ public class Article {
   public void printAllReply() {
     System.out.println("댓글 " + "_".repeat(25));
     for (Reply r : this.replyList) {
-      System.out.println(String.format("%d. %s: %s\tLikes: %d %s", r.getIndex(), r.getWriter(),
-          r.getText(), r.getLikes(), r.getDate()));
+      System.out.printf("%d. %s: %s\tLikes: %d\t%s\n", r.getIndex(), r.getWriter(), r.getText(),
+          r.getLikes(), r.getDate());
     }
   }
 

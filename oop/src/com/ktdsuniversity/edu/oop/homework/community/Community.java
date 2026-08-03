@@ -15,6 +15,17 @@ public class Community implements ArticleService, ReplyService {
   private Scanner sc;
   private int articleIndex;
 
+  private final String INPUT_TITLE = "제목을 작성하세요 (30자 이하): ";
+  private final String INPUT_WRITER = "작성자를 입력하세요: ";
+  private final String INPUT_TEXT = "내용을 입력하세요: ";
+  private final String WRONG_ARTICLE_INDEX = "잘못된 게시글 번호입니다.";
+  private final String WRONG_REPLY_INDEX = "잘못된 댓글 번호입니다.";
+  private final String NO_ARTICLE = "게시글이 없습니다.";
+  private final String NO_REPLY = "등록된 댓글이 없습니다.";
+  private final String REQUIRED_TITLE = "제목은 필수입니다 (30자 이하).";
+  private final String REQUIRED_WRITER = "작성자 입력은 필수입니다.";
+
+
   public Community() {
     this.articleList = new ArrayList<>();
     this.sc = new Scanner(System.in);
@@ -32,11 +43,11 @@ public class Community implements ArticleService, ReplyService {
     String writer = "";
     String text = "";
     while (true) {
+      System.out.print(INPUT_TITLE);
       try {
-        System.out.print("제목을 작성하세요 (30자 이하): ");
         title = sc.nextLine();
         if (title == null || title.isBlank() || title.length() > 30) {
-          throw new ArticleException("제목은 필수입니다 (30자 이하).");
+          throw new ArticleException(REQUIRED_TITLE);
         }
         break;
       } catch (ArticleException ae) {
@@ -45,11 +56,11 @@ public class Community implements ArticleService, ReplyService {
     }
 
     while (true) {
+      System.out.print(INPUT_WRITER);
       try {
-        System.out.print("작성자를 입력하세요: ");
         writer = sc.nextLine();
         if (writer == null || writer.isBlank()) {
-          throw new ArticleWriterException("작성자 입력은 필수입니다.");
+          throw new ArticleWriterException(REQUIRED_WRITER);
         }
         break;
       } catch (ArticleWriterException awe) {
@@ -57,20 +68,20 @@ public class Community implements ArticleService, ReplyService {
       }
     }
 
+    System.out.println(INPUT_TEXT);
     text = sc.nextLine();
 
-    this.articleList.add(new Article(articleIndex++, title, writer, text));
+    this.articleList.add(new Article(this.articleIndex++, title, writer, text));
 
   }
 
   @Override
   public void printArticleTitles() {
     if (this.articleList.size() == 0) {
-      System.out.println("아직 등록된 게시글이 없습니다.");
+      System.out.println(NO_ARTICLE);
     } else {
       for (Article a : this.articleList) {
-        System.out.println(
-            String.format("%d. %s (%d)", a.getIndex(), a.getTitle(), a.getReplyList().size()));
+        System.out.printf("%d. %s (%d)\n", a.getIndex(), a.getTitle(), a.getReplyList().size());
       }
     }
   }
@@ -96,15 +107,15 @@ public class Community implements ArticleService, ReplyService {
 
     Article article = findArticleByIndex(articleIndex);
     if (article == null) {
-      System.out.println("잘못된 게시글 번호입니다.");
+      System.out.println(WRONG_ARTICLE_INDEX);
       return;
     }
 
     // 조회수 증가
     article.view();
     // 제목 출력
-    System.out.println(String.format("%d. %s (%d)", article.getIndex(), article.getTitle(),
-        article.getReplyList().size()));
+    System.out.printf("%d. %s (%d)\n", article.getIndex(), article.getTitle(),
+        article.getReplyList().size());
     // 등록일, 조회수 출력
     System.out.println("등록일: " + article.getDate() + " / 조회수: " + article.getViews());
     // 내용 출력
@@ -112,7 +123,7 @@ public class Community implements ArticleService, ReplyService {
     System.out.println(article.getText());
     // 댓글 출력
     if (article.getReplyList().size() == 0) {
-      System.out.println("등록된 댓글이 없습니다.");
+      System.out.println(NO_REPLY);
     } else {
       article.printAllReply();
     }
@@ -125,7 +136,7 @@ public class Community implements ArticleService, ReplyService {
   public void updateArticle(int articleIndex) {
     Article article = findArticleByIndex(articleIndex);
     if (article == null) {
-      System.out.println("잘못된 게시글 번호입니다.");
+      System.out.println(WRONG_ARTICLE_INDEX);
       return;
     }
 
@@ -146,7 +157,7 @@ public class Community implements ArticleService, ReplyService {
   public void deleteArticle(int articleIndex) {
     Article article = findArticleByIndex(articleIndex);
     if (article == null) {
-      System.out.println("잘못된 게시글 번호입니다.");
+      System.out.println(WRONG_ARTICLE_INDEX);
       return;
     }
 
@@ -157,7 +168,7 @@ public class Community implements ArticleService, ReplyService {
   @Override
   public void printNumOfArticle() {
     if (this.articleList.size() == 0) {
-      System.out.println("등록된 게시글이 없습니다.");
+      System.out.println(NO_ARTICLE);
     } else {
       System.out.println(this.articleList.size() + "개의 게시글이 등록되었습니다.");
     }
@@ -169,12 +180,11 @@ public class Community implements ArticleService, ReplyService {
     for (Article a : this.articleList) {
       if (a.getTitle().contains(keyword)) {
         isExist = true;
-        System.out.println(
-            String.format("%d. %s (%d)", a.getIndex(), a.getTitle(), a.getReplyList().size()));
+        System.out.printf("%d. %s (%d)\n", a.getIndex(), a.getTitle(), a.getReplyList().size());
       }
     }
     if (!isExist) {
-      System.out.println("검색된 게시글이 없습니다.");
+      System.out.println("검색된 " + NO_ARTICLE);
     }
 
   }
@@ -183,7 +193,7 @@ public class Community implements ArticleService, ReplyService {
   public void deleteAllArticle() {
     int numOfArticles = this.articleList.size();
     if (numOfArticles == 0) {
-      System.out.println("제거할 게시글이 없습니다.");
+      System.out.println(NO_ARTICLE);
     } else {
       this.articleList.clear();
       System.out.println(numOfArticles + "개의 게시글을 삭제했습니다.");
@@ -196,7 +206,7 @@ public class Community implements ArticleService, ReplyService {
   public void createReply(int articleIndex) {
     Article a = findArticleByIndex(articleIndex);
     if (a == null) {
-      System.out.println("잘못된 게시글 번호입니다.");
+      System.out.println(WRONG_ARTICLE_INDEX);
       return;
     }
     if (a.getReplyList().size() >= 10) {
@@ -206,11 +216,11 @@ public class Community implements ArticleService, ReplyService {
       String text = "";
 
       while (true) {
+        System.out.print(INPUT_WRITER);
         try {
-          System.out.print("작성자를 입력하세요: ");
           writer = sc.nextLine();
           if (writer == null || writer.isBlank()) {
-            throw new ArticleWriterException("작성자 입력은 필수입니다.");
+            throw new ArticleWriterException(REQUIRED_WRITER);
           }
           break;
         } catch (ArticleWriterException awe) {
@@ -218,6 +228,7 @@ public class Community implements ArticleService, ReplyService {
         }
       }
 
+      System.out.println(INPUT_TEXT);
       text = sc.nextLine();
 
       a.addReply(new Reply(a.getReplyIndex(), text, writer));
@@ -245,13 +256,13 @@ public class Community implements ArticleService, ReplyService {
   public void deleteReply(int articleIndex, int replyIndex) {
     Article a = findArticleByIndex(articleIndex);
     if (a == null) {
-      System.out.println("잘못된 게시글 번호입니다.");
+      System.out.println(WRONG_ARTICLE_INDEX);
       return;
     }
 
     Reply r = findReplyByIndex(a, replyIndex);
     if (r == null) {
-      System.out.println("잘못된 댓글 번호입니다.");
+      System.out.println(WRONG_REPLY_INDEX);
       return;
     }
 
@@ -262,13 +273,13 @@ public class Community implements ArticleService, ReplyService {
   public void likeReply(int articleIndex, int replyIndex) {
     Article a = findArticleByIndex(articleIndex);
     if (a == null) {
-      System.out.println("잘못된 게시글 번호입니다.");
+      System.out.println(WRONG_ARTICLE_INDEX);
       return;
     }
 
     Reply r = findReplyByIndex(a, replyIndex);
     if (r == null) {
-      System.out.println("잘못된 댓글 번호입니다.");
+      System.out.println(WRONG_REPLY_INDEX);
       return;
     }
 
@@ -279,13 +290,13 @@ public class Community implements ArticleService, ReplyService {
   public void deleteAllReply(int articleIndex) {
     Article a = findArticleByIndex(articleIndex);
     if (a == null) {
-      System.out.println("잘못된 게시글 번호입니다.");
+      System.out.println(WRONG_ARTICLE_INDEX);
       return;
     }
 
     int numOfReplies = a.getReplyList().size();
     if (numOfReplies == 0) {
-      System.out.println("등록된 댓글이 없습니다.");
+      System.out.println(NO_REPLY);
     } else {
       a.clearReply();
       System.out.println(numOfReplies + "개의 댓글을 삭제했습니다.");
