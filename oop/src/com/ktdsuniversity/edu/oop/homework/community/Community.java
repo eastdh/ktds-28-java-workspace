@@ -303,4 +303,8 @@ public class Community implements ArticleService, ReplyService {
     }
   }
 
+  public void closeScanner() {
+    this.sc.close();
+  }
+
 }

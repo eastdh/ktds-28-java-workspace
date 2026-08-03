@@ -91,6 +91,7 @@ public class CommunityMain {
       } else if (select.equals("13")) {
         System.out.println("종료합니다");
         sc.close();
+        community.closeScanner();
         return;
       } else {
         System.out.println("잘못된 입력입니다.");
