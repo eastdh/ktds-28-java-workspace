@@ -1,8 +1,10 @@
-package com.ktdsuniversity.edu.oop.homework.community.data;
+package com.ktdsuniversity.edu.oop.homework.community;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import com.ktdsuniversity.edu.oop.homework.community.data.Article;
+import com.ktdsuniversity.edu.oop.homework.community.data.Reply;
 import com.ktdsuniversity.edu.oop.homework.community.exceptions.ArticleException;
 import com.ktdsuniversity.edu.oop.homework.community.exceptions.ArticleWriterException;
 import com.ktdsuniversity.edu.oop.homework.community.service.ArticleService;

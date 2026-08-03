@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
 
 class Solution {
   public static void main(String[] args) {
@@ -13,16 +11,12 @@ class Solution {
   }
 
   public String solution(String s) {
-    String lowers = "";
-    String uppers = "";
 
-    List<Integer> lowList = new ArrayList<>();
-    List<Integer> upList = new ArrayList<>();
     for (int str : s.chars().toArray()) {}
 
     // 대문자 소문자 분리
     // 각각 .chars().toArray()해서 sort
 
-    return lowers + uppers;
+    return s;
   }
 }

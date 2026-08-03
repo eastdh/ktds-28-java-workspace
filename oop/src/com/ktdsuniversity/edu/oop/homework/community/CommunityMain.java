@@ -1,7 +1,6 @@
 package com.ktdsuniversity.edu.oop.homework.community;
 
 import java.util.Scanner;
-import com.ktdsuniversity.edu.oop.homework.community.data.Community;
 
 public class CommunityMain {
 
@@ -37,72 +36,61 @@ public class CommunityMain {
       System.out.print("원하는 메뉴의 번호를 입력하세요: ");
       String select = sc.nextLine();
       System.out.println();
-      switch (select) {
-        case "1":
+      try {
+
+        if (select.equals("1")) {
           community.createArticle();
-          break;
-        case "2":
+        } else if (select.equals("2")) {
           community.printArticleTitles();
-          break;
-        case "3":
+        } else if (select.equals("3")) {
           System.out.print("게시물의 번호를 입력하세요: ");
-          articleIndex = sc.nextInt();
+          articleIndex = Integer.parseInt(sc.nextLine());
           community.printArticleByIndex(articleIndex);
-          break;
-        case "4":
+        } else if (select.equals("4")) {
           System.out.print("게시물의 번호를 입력하세요: ");
-          articleIndex = sc.nextInt();
+          articleIndex = Integer.parseInt(sc.nextLine());
           community.updateArticle(articleIndex);
-          break;
-        case "5":
+        } else if (select.equals("5")) {
           System.out.print("게시물의 번호를 입력하세요: ");
-          articleIndex = sc.nextInt();
+          articleIndex = Integer.parseInt(sc.nextLine());
           community.deleteArticle(articleIndex);
-          break;
-        case "6":
+        } else if (select.equals("6")) {
           community.printNumOfArticle();
-          break;
-        case "7":
+        } else if (select.equals("7")) {
           System.out.print("게시물의 번호를 입력하세요: ");
-          articleIndex = sc.nextInt();
+          articleIndex = Integer.parseInt(sc.nextLine());
           community.createReply(articleIndex);
-          break;
-        case "8":
+        } else if (select.equals("8")) {
           System.out.print("게시물의 번호를 입력하세요: ");
-          articleIndex = sc.nextInt();
+          articleIndex = Integer.parseInt(sc.nextLine());
           System.out.print("댓글의 번호를 입력하세요: ");
-          replyIndex = sc.nextInt();
+          replyIndex = Integer.parseInt(sc.nextLine());
           community.deleteReply(articleIndex, replyIndex);
-          break;
-        case "9":
+        } else if (select.equals("9")) {
           System.out.print("게시물의 번호를 입력하세요: ");
-          articleIndex = sc.nextInt();
+          articleIndex = Integer.parseInt(sc.nextLine());
           System.out.print("댓글의 번호를 입력하세요: ");
-          replyIndex = sc.nextInt();
+          replyIndex = Integer.parseInt(sc.nextLine());
           community.likeReply(articleIndex, replyIndex);
-          break;
-        case "10":
+        } else if (select.equals("10")) {
           System.out.print("검색어를 입력하세요: ");
-          sc.nextLine(); // 개행문자 소비
           String keyword = sc.nextLine();
           community.searchArticleByKeyword(keyword);
-          break;
-        case "11":
+        } else if (select.equals("11")) {
           community.deleteAllArticle();
-          break;
-        case "12":
+        } else if (select.equals("12")) {
           System.out.print("게시물의 번호를 입력하세요: ");
-          articleIndex = sc.nextInt();
+          articleIndex = Integer.parseInt(sc.nextLine());
           community.deleteAllReply(articleIndex);
-          break;
-        case "13":
+        } else if (select.equals("13")) {
           System.out.println("종료합니다");
           sc.close();
           return;
-
-        default:
+        } else {
           System.out.println("잘못된 입력입니다.");
-          break;
+        }
+      } catch (NumberFormatException nfe) {
+        System.out.println("잘못된 입력입니다.");
       }
     }
   }
