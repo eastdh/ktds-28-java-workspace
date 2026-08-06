@@ -1,5 +1,6 @@
 package com.ktdsuniversity.edu.fp.lambda;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import com.ktdsuniversity.edu.fp.anonymous.inf.Compare;
@@ -15,12 +16,18 @@ public class DishSummary {
   }
 
   public void printAllDishesBy(Predicate<Dish> condition) {
-    for (int i = 0; i < this.dishes.size(); i++) {
-      Dish dish = this.dishes.get(i);
-      if (condition.test(dish)) {
-        System.out.println(dish);
-      }
-    }
+
+    List<Dish> temp = new ArrayList<>();
+    temp.addAll(this.dishes);
+    temp.removeIf(condition.negate());
+
+    temp.forEach(System.out::println);
+    // for (int i = 0; i < this.dishes.size(); i++) {
+    // Dish dish = this.dishes.get(i);
+    // if (condition.test(dish)) {
+    // System.out.println(dish);
+    // }
+    // }
   }
 
   public <T> void printTotalCaloriesBy(Compare<T> compare, T type) {
