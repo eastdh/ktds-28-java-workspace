@@ -14,6 +14,11 @@ public class UserServiceImpl implements UserService {
   private Library library;
   private LibraryService libraryService;
 
+  public UserServiceImpl(Library library) {
+    this.library = library;
+    this.libraryService = new LibraryServiceImpl(library);
+  }
+
   public UserServiceImpl(Library library, User user) {
     this.library = library;
     this.libraryService = new LibraryServiceImpl(library);
@@ -48,22 +53,29 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public void searchBook() {
+    if (this.userDto == null) {
+      System.out.println("로그인이 필요합니다.");
+    }
+    String keyword = ScannerUtils.scanString("검색할 키워드를 입력하세요: ");
     this.library.getBookList().stream() // Stream<Book>
-        .filter(b -> isThisTheBook(b)) // Stream<Book>
+        .filter(b -> isThisTheBook(b, keyword)) // Stream<Book>
         .forEach(b -> System.out.printf("관리 번호: %d\t%s (%s) 저자: %s 출판사: %s\t대여 중: %B 반납 완료: %B\n",
             b.getManagementNumber(), b.getTitle(), b.getGenre(), b.getWriter(), b.getPublisher(),
             b.isBorrowed(), b.isReturned()));
 
   }
 
-  private boolean isThisTheBook(Book book) {
-    String keyword = ScannerUtils.scanString("검색할 키워드를 입력하세요: ");
+  private boolean isThisTheBook(Book book, String keyword) {
+
     return book.getTitle().contains(keyword) || book.getPublisher().contains(keyword)
         || book.getWriter().contains(keyword) || book.getGenre().contains(keyword);
   }
 
   @Override
   public void borrowBook() {
+    if (this.userDto == null) {
+      System.out.println("로그인이 필요합니다.");
+    }
     long bookNumber = ScannerUtils.scanLong("빌릴 책의 관리 번호를 입력하세요: ");
 
     Book book = this.library.getBookList().stream() // Stream<book>
@@ -84,6 +96,9 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public void returnBook() {
+    if (this.userDto == null) {
+      System.out.println("로그인이 필요합니다.");
+    }
     long bookNumber = ScannerUtils.scanLong("반납할 책의 관리 번호를 입력하세요: ");
     Book book = this.library.getBookList().stream() // Stream<book>
         .filter(b -> b.getManagementNumber() == bookNumber) // Stream<book>

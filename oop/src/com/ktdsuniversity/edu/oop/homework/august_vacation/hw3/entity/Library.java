@@ -17,13 +17,13 @@ public class Library {
 
     this.bookList = FileUtils.parseCsv(Book.class, Book::new);
     this.userList = FileUtils.parseCsv(User.class, User::new);
+    this.rentalList = FileUtils.parseCsv(Rental.class, Rental::new);
     this.userDtoList = new ArrayList<>();
 
     this.userList.stream() // Stream<User>
         .map(u -> new UserDto(u, this)) // Stream<UserDto>
         .forEach(ud -> this.userDtoList.add(ud));
 
-    this.rentalList = FileUtils.parseCsv(Rental.class, Rental::new);
   }
 
 

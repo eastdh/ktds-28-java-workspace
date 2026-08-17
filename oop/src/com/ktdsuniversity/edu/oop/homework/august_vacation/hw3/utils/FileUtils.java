@@ -2,11 +2,11 @@ package com.ktdsuniversity.edu.oop.homework.august_vacation.hw3.utils;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
@@ -15,10 +15,11 @@ import com.ktdsuniversity.edu.oop.homework.august_vacation.hw3.entity.Rental;
 import com.ktdsuniversity.edu.oop.homework.august_vacation.hw3.entity.User;
 
 public class FileUtils {
-
-  private static final String BOOK_PATH = "data/books.csv";
-  private static final String USER_PATH = "data/users.csv";
-  private static final String RENTAL_PATH = "data/rental.csv";
+  private static final String PATH =
+      FileUtils.class.getResource("").getPath().replaceAll("/utils", "");
+  private static final String BOOK_PATH = PATH + "data/books.csv";
+  private static final String USER_PATH = PATH + "data/users.csv";
+  private static final String RENTAL_PATH = PATH + "data/rental.csv";
 
   private FileUtils() {}
 
@@ -39,6 +40,20 @@ public class FileUtils {
   public static <T> void writeFile(List<T> dataList) {
 
     String filePath = getFilePath(dataList.getFirst().getClass());
+    File targetFile = new File(filePath);
+
+    // filePath의 부모폴더가 존재하는지 확인
+    if (!targetFile.getParentFile().exists()) {
+      // 없으면 생성
+      targetFile.getParentFile().mkdirs();
+    }
+    if (!targetFile.exists()) {
+      try {
+        targetFile.createNewFile();
+      } catch (IOException e) {
+      }
+    }
+
     List<String> linesToWrite = new ArrayList<>();
 
     dataList.stream() // Stream<T>
@@ -46,7 +61,7 @@ public class FileUtils {
         .forEach(s -> linesToWrite.add(s));
 
     try (BufferedWriter bw =
-        new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filePath), "UTF-8"))) {
+        new BufferedWriter(new FileWriter(targetFile, StandardCharsets.UTF_8))) {
       for (int i = 0; i < linesToWrite.size(); i++) {
         bw.write(linesToWrite.get(i));
         if (i < linesToWrite.size() - 1) {
@@ -61,11 +76,24 @@ public class FileUtils {
 
   public static <T> List<T> parseCsv(Class<T> dataClass, Function<String[], T> mapper) {
     String filePath = getFilePath(dataClass);
+    File targetFile = new File(filePath);
+
+    // filePath의 부모폴더가 존재하는지 확인
+    if (!targetFile.getParentFile().exists()) {
+      // 없으면 생성
+      targetFile.getParentFile().mkdirs();
+    }
+    if (!targetFile.exists()) {
+      try {
+        targetFile.createNewFile();
+      } catch (IOException e) {
+      }
+    }
     List<T> result = new ArrayList<>();
     String line;
 
     try (BufferedReader br =
-        new BufferedReader(new InputStreamReader(new FileInputStream(filePath), "UTF-8"))) {
+        new BufferedReader(new FileReader(targetFile, StandardCharsets.UTF_8))) {
       while ((line = br.readLine()) != null) {
         if (line.isBlank()) {
           continue;
@@ -82,7 +110,6 @@ public class FileUtils {
       ioe.printStackTrace();
 
     }
-
     return result;
 
   }
