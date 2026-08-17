@@ -215,8 +215,10 @@ public class DateTime {
 
     printPeriodFromTo(LocalDate.parse("1998-10-28"), LocalDate.now());
 
+    System.out.println();
     printBetweenDaysFromTo(LocalDate.parse("1998-10-28"), LocalDate.now());
     printBetweenDaysFromTo(LocalDate.now(), LocalDate.parse("1998-10-28"));
+    System.out.println();
 
     printIsAfter(LocalDate.parse("2026-08-03"));
     printIsAfter(LocalDate.parse("2026-08-04"));
