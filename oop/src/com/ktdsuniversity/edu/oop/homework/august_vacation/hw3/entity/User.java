@@ -86,7 +86,7 @@ public class User {
 
   @Override
   public int hashCode() {
-    return Objects.hash(Long.valueOf(this.userId));
+    return Objects.hash(name, phone);
   }
 
   @Override
@@ -98,7 +98,7 @@ public class User {
     if (getClass() != obj.getClass())
       return false;
     User other = (User) obj;
-    return this.userId == other.userId;
+    return Objects.equals(name, other.name) && Objects.equals(phone, other.phone);
   }
 
 }

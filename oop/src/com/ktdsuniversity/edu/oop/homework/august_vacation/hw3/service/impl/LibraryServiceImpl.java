@@ -148,7 +148,16 @@ public class LibraryServiceImpl implements LibraryService {
 
   @Override
   public void addNewMember(String name, String phoneNumber) {
+    User duplicateUser = this.library.getUserList().stream() // Stream<User>
+        .filter(u -> u.equals(new User(-1, name, phoneNumber))) // Stream<User>
+        .findFirst() // Optional<User>
+        .orElse(null);
+    if (duplicateUser != null) {
+      System.out.println("이미 존재하는 회원입니다.");
+      return;
+    }
     User newMember = new User(++this.userId, name, phoneNumber);
+    this.library.getUserList().add(newMember);
     this.library.getUserDtoList().add(new UserDto(newMember));
     FileUtils.createRow(this.library.getUserList(), newMember);
   }
