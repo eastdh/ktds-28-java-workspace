@@ -149,7 +149,7 @@ public class LibraryServiceImpl implements LibraryService {
   @Override
   public void addNewMember(String name, String phoneNumber) {
     User duplicateUser = this.library.getUserList().stream() // Stream<User>
-        .filter(u -> u.equals(new User(-1, name, phoneNumber))) // Stream<User>
+        .filter(u -> u.getName().equals(name) && u.getPhone().equals(phoneNumber)) // Stream<User>
         .findFirst() // Optional<User>
         .orElse(null);
     if (duplicateUser != null) {
