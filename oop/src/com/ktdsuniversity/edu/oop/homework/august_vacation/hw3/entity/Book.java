@@ -38,6 +38,9 @@ public class Book {
     this.isbn = isbn;
     this.managementNumber = managementNumber;
     this.stockDate = LocalDate.now();
+    this.borrowDate = LocalDate.now();
+    this.returnDate = LocalDate.now();
+    this.borrowUser = -1;
   }
 
 

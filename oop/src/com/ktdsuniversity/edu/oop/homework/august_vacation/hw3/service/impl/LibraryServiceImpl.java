@@ -69,6 +69,9 @@ public class LibraryServiceImpl implements LibraryService {
     System.out.println("반납 대상자 목록");
     this.library.getUserDtoList().stream() // Stream<UserDto>
         .filter(u -> {
+          if (u.getBorrowedBooks().isEmpty()) {
+            return false;
+          }
           return !u.getBorrowedBooks().stream() // Stream<Book>
               .filter(b -> hasTheDayCome(b) && !isExpired(b)) // Stream<Book>
               .toList() // List<Book>
@@ -90,7 +93,7 @@ public class LibraryServiceImpl implements LibraryService {
     this.library.getBookList().stream() // Stream<Book>
         .sorted((b1, b2) -> b2.getRentalCount() - b1.getRentalCount()) // Stream<Book>
         .limit(5) // Stream<Book>
-        .forEach(b -> System.out.printf("%s : %d회", b.getTitle(), b.getRentalCount()));
+        .forEach(b -> System.out.printf("%s : %d회\n", b.getTitle(), b.getRentalCount()));
 
     System.out.println("비인기 도서 Top 5");
     this.library.getBookList().stream() // Stream<Book>
@@ -131,8 +134,8 @@ public class LibraryServiceImpl implements LibraryService {
       FileUtils.updateRow(this.library.getUserList(), userDto.getUser());
     }
     book.setReturned();
-    book.setBorrowDate(null);
-    book.setReturnDate(null);
+    book.setBorrowDate(LocalDate.now());
+    book.setReturnDate(LocalDate.now());
     book.setBorrowUser(-1);
     FileUtils.updateRow(this.library.getBookList(), book);
     FileUtils.deleteRow(this.library.getRentalList(),
