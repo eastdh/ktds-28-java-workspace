@@ -3,11 +3,13 @@ package com.ktdsuniversity.edu.oop.homework.lotto;
 public class HW2 {
   public static void main(String[] args) {
     int[] lottoNumbers = new int[6];
-    int index = 0;
     boolean isExist = false;
+    int index = 0;
+    int random = 0;
+
     while (index < 6) {
       isExist = false;
-      int random = (int) (Math.random() * 45) + 1;
+      random = (int) (Math.random() * 45) + 1;
       for (int l : lottoNumbers) {
         if (l == random) {
           isExist = true;
@@ -18,6 +20,14 @@ public class HW2 {
         lottoNumbers[index++] = random;
       }
     }
-    System.out.println(lottoNumbers);
+
+    System.out.print("[");
+    for (int i = 0; i < lottoNumbers.length; i++) {
+      System.out.print(lottoNumbers[i]);
+      if (i < lottoNumbers.length - 1) {
+        System.out.print(", ");
+      }
+    }
+    System.out.print("]");
   }
 }
